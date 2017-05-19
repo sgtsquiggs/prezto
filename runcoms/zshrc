@@ -11,3 +11,65 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 # Customize to your needs...
+
+# Aliases
+alias git=hub
+alias gdy='git diffy'
+alias gu='git up'
+alias st='open -a SourceTree'
+alias atom.='atom .'
+alias atom..='atom ..'
+alias code.='code .'
+alias code..='code ..'
+alias lla='ll -a'
+alias tunnelhome="killall autossh > /dev/null; autossh -M 0 -f -N gogo-tunnel"
+alias whatismyip="wget http://ipinfo.io/ip -qO -"
+alias lock="pmset displaysleepnow"
+alias gtl="git tag -l | gsort -V"
+
+# Functions
+duh() { du -sh $* | gsort -h }
+syspip() { PIP_REQUIRE_VIRTUALENV="" pip "$@" }
+syspip3() { PIP_REQUIRE_VIRTUALENV="" pip3 "$@" }
+reset_simulators() {
+  instruments -s devices \
+  | grep "(\d[.0-9]\+) \[[0-9A-F]\{8\}-[0-9A-F]\{4\}-[0-9A-F]\{4\}-[0-9A-F]\{4\}-[0-9A-F]\{12\}\]" \
+  | grep -o "[0-9A-F]\{8\}-[0-9A-F]\{4\}-[0-9A-F]\{4\}-[0-9A-F]\{4\}-[0-9A-F]\{12\}" \
+  | while read -r line ; do
+    echo "Reseting Simulator with UDID: $line"
+    xcrun simctl erase $line
+  done
+}
+glt() {
+  git tag -l | gsort -V | tail -n1 | xargs echo -n | pbcopy
+  echo `pbpaste`
+}
+
+# Homebrew environment
+export HOMEBREW_GITHUB_API_TOKEN=6378135660d9be9062f0a96612099057735fbfa2
+
+# Python environment
+export PIP_REQUIRE_VIRTUALENV=true
+export PIP_DOWNLOAD_CACHE=$HOME/.pip/cache
+export PROJECT_HOME="$HOME/Projects"
+export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python
+export VIRTUALENVWRAPPER_VIRTUALENV=/usr/local/bin/virtualenv
+export VIRTUALENVWRAPPER_VIRTUALENV_ARGS='--no-site-packages'
+
+# Go environment
+GOPATH="$HOME/Projects/Go"
+
+# added by travis gem
+[ -f /Users/matthew/.travis/travis.sh ] && source /Users/matthew/.travis/travis.sh
+
+# RVM
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+
+# composer.phar
+PATH=$PATH:$HOME/.composer/vendor/bin # Add composer.phar vendor bin to PATH
+
+# awscli completion
+source /usr/local/share/zsh/site-functions/_aws
+
+# Yarn
+PATH=$PATH:`yarn global bin`
