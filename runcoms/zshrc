@@ -46,7 +46,7 @@ glt() {
 }
 
 # Homebrew environment
-export HOMEBREW_GITHUB_API_TOKEN=6378135660d9be9062f0a96612099057735fbfa2
+export HOMEBREW_GITHUB_API_TOKEN=
 
 # Python environment
 export PIP_REQUIRE_VIRTUALENV=true
