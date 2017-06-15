@@ -62,14 +62,8 @@ GOPATH="$HOME/Projects/Go"
 # added by travis gem
 [ -f /Users/matthew/.travis/travis.sh ] && source /Users/matthew/.travis/travis.sh
 
-# RVM
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-
 # composer.phar
 PATH=$PATH:$HOME/.composer/vendor/bin # Add composer.phar vendor bin to PATH
 
 # awscli completion
 source /usr/local/share/zsh/site-functions/_aws
-
-# Yarn
-PATH=$PATH:`yarn global bin`
